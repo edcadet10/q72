@@ -1,6 +1,7 @@
 name: Playtest report
 description: Share an anonymized result or usability observation.
 title: "[Playtest]: "
+labels: [playtest]
 body:
   - type: markdown
     attributes:

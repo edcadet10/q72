@@ -1,6 +1,7 @@
 name: Scenario pitch
 description: Propose a new GTM systems incident without writing code.
 title: "[Scenario]: "
+labels: [scenario]
 body:
   - type: markdown
     attributes:
