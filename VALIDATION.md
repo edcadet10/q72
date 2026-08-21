@@ -29,6 +29,8 @@ Structural success does not prove enjoyment. It only establishes that the protot
 
 The first automated run was rejected because the score saturated at 100, creating false ties. After recalibration, the opening-move check passed, but one second-stage action was optimal for every pressure profile. That observation was used to preregister the stage-level diversity check above before the consequence model was revised again.
 
+An independent Claude Code review of `v0.1.0` found that action deltas were recorded before bounded metrics were clamped. As a result, displayed and downloaded deltas could describe movement that did not occur, while the structural test mistakenly checked those same nominal deltas. In `v0.1.1`, deltas are calculated from the post-clamp metric state, the structural test compares actual before-and-after values, and an exhaustive evidence-reconciliation check covers every completed run. The full-launch consequence was also recalibrated: launching a broken process now increases deal risk instead of claiming to reduce risk that may already be zero.
+
 ## Instrument
 
 The prototype embeds the 11-item miniPXI verbatim, uses its `-3` to `+3` response scale, randomizes item order, and measures immediately after play. Playtest evidence is stored locally and downloaded as JSON; the prototype uploads nothing.

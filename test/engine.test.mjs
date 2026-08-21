@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   applyDecision,
+  buildEvidence,
   calculateScore,
   createGame,
   getCurrentStage,
@@ -39,12 +40,33 @@ test("every action changes at least two business metrics in every reachable stat
     for (const state of frontier.splice(0)) {
       for (const option of getCurrentStage(state).options) {
         const next = applyDecision(state, option.id);
-        const changed = Object.values(next.lastDelta).filter((value) => value !== 0).length;
+        const actualDelta = Object.fromEntries(
+          Object.keys(state.metrics).map((key) => [key, next.metrics[key] - state.metrics[key]]),
+        );
+        assert.deepEqual(
+          next.lastDelta,
+          actualDelta,
+          `${state.profileId}/${stages[index].id}/${option.id} recorded a phantom metric delta`,
+        );
+        const changed = Object.values(actualDelta).filter((value) => value !== 0).length;
         assert.ok(changed >= 2, `${state.profileId}/${stages[index].id}/${option.id} changed only ${changed} metrics`);
         nextFrontier.push(next);
       }
     }
     frontier.push(...nextFrontier);
+  }
+});
+
+test("downloaded evidence deltas reconcile to final metrics", () => {
+  for (const profileId of Object.keys(pressureProfiles)) {
+    for (const run of enumerate(profileId)) {
+      const evidence = buildEvidence(run);
+      const reconstructed = { ...createGame(profileId).metrics };
+      for (const decision of evidence.decisions) {
+        for (const key of Object.keys(reconstructed)) reconstructed[key] += decision.delta[key];
+      }
+      assert.deepEqual(reconstructed, evidence.finalMetrics, `${profileId} evidence did not reconcile`);
+    }
   }
 });
 

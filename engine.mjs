@@ -200,7 +200,7 @@ export const stages = [
         owner: "Executive Sponsor",
         cost: 4,
         description: "Keep the date, publish a short FAQ, and make teams resolve exceptions through normal channels.",
-        delta: { sellerMinutes: -85, dealsAtRisk: -1, integrity: -9, trust: -13 },
+        delta: { sellerMinutes: -85, dealsAtRisk: 1, integrity: -9, trust: -13 },
         flags: { fullLaunch: true },
         response: "The program is green on the status slide. The workaround channels light up again within the hour.",
       },
@@ -335,17 +335,21 @@ export function applyDecision(state, actionId) {
 
   const next = clone(state);
   const adjustment = profileAdjustment(next.profileId, stage.id, action.id);
+  const previousMetrics = clone(next.metrics);
   const delta = {};
 
   for (const key of Object.keys(next.metrics)) {
-    delta[key] = (action.delta[key] ?? 0) + (adjustment[key] ?? 0);
-    next.metrics[key] += delta[key];
+    const proposedDelta = (action.delta[key] ?? 0) + (adjustment[key] ?? 0);
+    next.metrics[key] += proposedDelta;
   }
 
   next.metrics.sellerMinutes = clamp(next.metrics.sellerMinutes, 0, 1200);
   next.metrics.dealsAtRisk = clamp(next.metrics.dealsAtRisk, 0, 12);
   next.metrics.integrity = clamp(next.metrics.integrity, 0, 100);
   next.metrics.trust = clamp(next.metrics.trust, 0, 100);
+  for (const key of Object.keys(next.metrics)) {
+    delta[key] = next.metrics[key] - previousMetrics[key];
+  }
   next.hoursRemaining = clamp(next.hoursRemaining - action.cost, 0, 72);
   Object.assign(next.flags, action.flags ?? {});
 
