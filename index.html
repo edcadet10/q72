@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Q-72 is an open-source quarter-end incident simulator for GTM program leaders.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%2307100d'/%3E%3Ctext x='7' y='42' fill='%23b8ff3d' font-size='28' font-family='monospace' font-weight='700'%3EQ72%3C/text%3E%3C/svg%3E">
+    <title>Q-72 · GTM incident simulator</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Q-72 home">
+        <span class="brand-mark">Q<span>−</span>72</span>
+        <span class="brand-subtitle">Revenue systems under pressure</span>
+      </a>
+      <div class="status-strip">
+        <span class="live-dot"></span>
+        <span>SIMULATION ENVIRONMENT</span>
+        <strong id="clock">T−72h</strong>
+      </div>
+    </header>
+
+    <main>
+      <section id="start-screen" class="start-screen">
+        <div class="start-grid">
+          <div class="start-copy">
+            <p class="eyebrow">AN OPEN GTM TABLETOP</p>
+            <h1>Quarter-end is not a dashboard.<br><em>It is a collision.</em></h1>
+            <p class="lede">
+              You own a segment transformation with 72 hours left in the quarter. Every fast fix moves work, risk,
+              or uncertainty to another team. Make four decisions. Live with the chain.
+            </p>
+            <button id="start-button" class="primary-button">
+              Enter the incident <span>→</span>
+            </button>
+            <p class="privacy-note">Five-minute vertical slice · Synthetic data · No account required</p>
+          </div>
+          <div class="briefing-card">
+            <div class="briefing-header">
+              <span>INCIDENT Q72-001</span><span class="severity">SEV-1</span>
+            </div>
+            <div class="chain-diagram" aria-label="Affected systems">
+              <span>SALES</span><i></i><span>CRM</span><i></i><span>FINANCE</span><i></i><span>LEGAL</span>
+            </div>
+            <blockquote>“A segment change touched the data model, forecast, compensation plan, and every seller's week.”</blockquote>
+            <dl>
+              <div><dt>Objective</dt><dd>Protect seller time without exporting hidden work</dd></div>
+              <div><dt>Constraint</dt><dd>No perfect fix survives all six stakeholders</dd></div>
+              <div><dt>Evidence</dt><dd>Every action produces a replayable operational trace</dd></div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section id="game-screen" class="game-screen hidden">
+        <div class="incident-banner">
+          <div><span class="severity">SEV-1</span><strong id="profile-label"></strong></div>
+          <p id="profile-signal"></p>
+          <small id="profile-briefing"></small>
+        </div>
+
+        <div class="metric-grid">
+          <article class="metric-card" data-metric="sellerMinutes">
+            <span>Seller minutes lost</span><strong class="metric-value">—</strong><small class="metric-delta">baseline</small>
+          </article>
+          <article class="metric-card" data-metric="dealsAtRisk">
+            <span>Deals at risk</span><strong class="metric-value">—</strong><small class="metric-delta">baseline</small>
+          </article>
+          <article class="metric-card" data-metric="integrity">
+            <span>Data integrity</span><strong class="metric-value">—</strong><small class="metric-delta">baseline</small>
+          </article>
+          <article class="metric-card" data-metric="trust">
+            <span>Field trust</span><strong class="metric-value">—</strong><small class="metric-delta">baseline</small>
+          </article>
+        </div>
+
+        <div class="workspace">
+          <aside class="rail left-rail">
+            <div class="rail-heading"><span>Operational trace</span><span id="progress-label">0 / 4 decisions</span></div>
+            <div class="progress-track"><i id="progress-fill"></i></div>
+            <ol id="timeline" class="timeline"></ol>
+          </aside>
+
+          <section class="decision-shell">
+            <div id="decision-panel">
+              <p id="stage-kicker" class="eyebrow"></p>
+              <h2 id="stage-title"></h2>
+              <p id="stage-prompt" class="stage-prompt"></p>
+              <div id="actions" class="actions"></div>
+            </div>
+
+            <div id="ending-panel" class="ending-panel hidden">
+              <p class="eyebrow">INCIDENT OUTCOME</p>
+              <div class="outcome-row"><h2 id="outcome-label"></h2><div class="score"><strong id="score"></strong><span>/100</span></div></div>
+              <p id="outcome-summary" class="outcome-summary"></p>
+              <h3>Your decision trace</h3>
+              <ol id="decision-recap" class="decision-recap"></ol>
+
+              <form id="playtest-form" class="survey">
+                <div class="survey-intro">
+                  <p class="eyebrow">DO NOT TRUST THE DEMO</p>
+                  <h3>Measure the experience.</h3>
+                  <p>This uses the validated 11-item miniPXI. Responses stay in your browser until you download them.</p>
+                </div>
+                <div id="survey-items"></div>
+                <fieldset class="replay-question">
+                  <legend>Would you voluntarily play a different pressure profile?</legend>
+                  <label><input type="radio" name="replay" value="yes" required> Yes</label>
+                  <label><input type="radio" name="replay" value="no" required> No</label>
+                </fieldset>
+                <div class="form-actions">
+                  <button id="download-evidence" type="button" class="primary-button">Download playtest evidence</button>
+                  <button id="replay-button" type="button" class="text-button">Replay with a new incident</button>
+                </div>
+                <p id="saved-note" class="privacy-note"></p>
+              </form>
+            </div>
+          </section>
+
+          <aside class="rail right-rail">
+            <div class="rail-heading"><span>Dependency surface</span><span>LIVE</span></div>
+            <div class="dependency-map">
+              <span class="map-node" data-node="salesforce">Salesforce</span>
+              <span class="map-node" data-node="finance">Forecast</span>
+              <span class="map-node" data-node="comp">Comp</span>
+              <span class="map-node" data-node="legal">Legal</span>
+              <span class="map-node" data-node="field">Field</span>
+              <span class="map-node agent-node" data-node="agent">Seller agent</span>
+              <svg viewBox="0 0 260 250" aria-hidden="true">
+                <path d="M130 40 L55 98 M130 40 L205 98 M55 98 L72 182 M55 98 L188 182 M205 98 L188 182 M205 98 L72 182 M72 182 L188 182" />
+              </svg>
+            </div>
+            <div class="legend"><span><i class="unknown"></i>Unverified</span><span><i class="known"></i>In scope</span></div>
+            <div class="principle">
+              <span>OPERATING PRINCIPLE</span>
+              <p>Speed is not efficiency when the work reappears on somebody else's queue.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer><span>Q‑72 / prototype 0.1</span><span>Deterministic consequences · synthetic organization</span></footer>
+    <script type="module" src="./game.mjs"></script>
+  </body>
+</html>

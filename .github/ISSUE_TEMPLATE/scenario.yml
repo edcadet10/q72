@@ -1,0 +1,49 @@
+name: Scenario pitch
+description: Propose a new GTM systems incident without writing code.
+title: "[Scenario]: "
+body:
+  - type: markdown
+    attributes:
+      value: A strong Q-72 scenario has no perfect answer and uses synthetic situations only.
+  - type: input
+    id: incident
+    attributes:
+      label: Incident in one sentence
+      placeholder: Two territory models go live during the same quarter.
+    validations:
+      required: true
+  - type: textarea
+    id: clock
+    attributes:
+      label: Why is the clock ticking?
+      description: Describe the deadline and what becomes harder if nobody acts.
+    validations:
+      required: true
+  - type: textarea
+    id: conflict
+    attributes:
+      label: Which teams or incentives conflict?
+      placeholder: Sales wants continuity; Finance needs auditable ownership; Systems cannot safely migrate both models at once.
+    validations:
+      required: true
+  - type: textarea
+    id: decisions
+    attributes:
+      label: Three plausible interventions
+      description: Give each intervention one upside and one downstream cost.
+    validations:
+      required: true
+  - type: textarea
+    id: assumption
+    attributes:
+      label: Player assumption to challenge
+      placeholder: Fast rollback is always safer than running parallel systems.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Data safety
+      options:
+        - label: This pitch contains no real customer data, confidential employer process, or copied system metadata.
+          required: true

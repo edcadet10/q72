@@ -1,0 +1,62 @@
+name: Playtest report
+description: Share an anonymized result or usability observation.
+title: "[Playtest]: "
+body:
+  - type: markdown
+    attributes:
+      value: Read PLAYTESTING.md first. Report failures as faithfully as successes and do not identify the participant.
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Participant's closest perspective
+      options:
+        - Revenue Operations
+        - GTM Systems or Salesforce
+        - Sales leadership
+        - Technical program management
+        - Systems-oriented game player
+        - Other or mixed
+    validations:
+      required: true
+  - type: dropdown
+    id: completed
+    attributes:
+      label: Did they complete without help?
+      options:
+        - "Yes"
+        - "No"
+    validations:
+      required: true
+  - type: input
+    id: curiosity
+    attributes:
+      label: miniPXI Curiosity score
+      description: Enter the calculated score from -3 to +3, or “not collected.”
+    validations:
+      required: true
+  - type: input
+    id: enjoyment
+    attributes:
+      label: miniPXI Enjoyment score
+      description: Enter the calculated score from -3 to +3, or “not collected.”
+    validations:
+      required: true
+  - type: textarea
+    id: replay
+    attributes:
+      label: Replay response
+      description: Paraphrase what would or would not make the participant play again.
+    validations:
+      required: true
+  - type: textarea
+    id: friction
+    attributes:
+      label: Confusion, friction, or observed behavior
+      description: Describe what happened without interpreting it for the participant.
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Privacy check
+      options:
+        - label: This report is anonymized and contains no employer-confidential or customer data.
+          required: true

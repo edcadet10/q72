@@ -1,0 +1,37 @@
+name: Bug report
+description: Report a reproducible problem in the game or repository.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping make Q-72 more reliable. Do not include private or employer-confidential data.
+  - type: textarea
+    id: observed
+    attributes:
+      label: What happened?
+      description: Include the screen, decision, and pressure profile if relevant.
+      placeholder: I expected… but instead…
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Start the game
+        2. Choose…
+        3. Observe…
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Browser and device
+      placeholder: Firefox 143 on macOS, keyboard only
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Screenshots are welcome if they contain no private data.
